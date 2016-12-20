@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DotLine_View">
+        <attr name="lineColor" format="color" />
+        <attr name="dotColor" format="color" />
+        <attr name="dotBorderColor" format="color" />
+        <attr name="dotBorderWidth" format="dimension" />
+        <attr name="dotSize" format="dimension" />
+    </declare-styleable>
+</resources>
