@@ -44,13 +44,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder> {
                     .into(holder.iv_item);
         } else
             holder.iv_item.setImageDrawable(null);
-        holder.tvTitle_item.setText(aux.getTitle());
-        if (aux.getSubtitle().isEmpty())
-            holder.tvSubTitle_item.setVisibility(View.GONE);
-        else {
-            holder.tvSubTitle_item.setVisibility(View.VISIBLE);
-            holder.tvSubTitle_item.setText(aux.getSubtitle());
-        }
+        holder.message.setTextTitle(aux.getTitle());
+        holder.message.setTextSubTitle(aux.getSubtitle());
+
         holder.rlItem.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
@@ -71,16 +67,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder> {
     class Holder extends RecyclerView.ViewHolder {
         RelativeLayout rlItem;
         ImageView iv_item;
-        TextView tvTitle_item;
-        TextView tvSubTitle_item;
+        Message_View message;
         DotLine_View line_and_dot;
 
         public Holder(View itemView) {
             super(itemView);
             rlItem = (RelativeLayout) itemView.findViewById(R.id.rlItem);
             iv_item = (ImageView) itemView.findViewById(R.id.iv_item);
-            tvTitle_item = (TextView) itemView.findViewById(R.id.tvTitle_item);
-            tvSubTitle_item = (TextView) itemView.findViewById(R.id.tvSubTitle_item);
+            message = (Message_View) itemView.findViewById(R.id.message_item);
             line_and_dot = (DotLine_View) itemView.findViewById(R.id.line_and_dot);
         }
     }

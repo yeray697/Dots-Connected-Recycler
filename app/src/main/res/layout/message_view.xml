@@ -1,0 +1,25 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bocadillo"
+    android:layout_centerVertical="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="right"
+        android:textSize="16sp"
+        android:text="subtitulosubtitulosubtitulosubtitulosubtitulosubtitulosubtitulosubtitulosubtitulosubtitulosubtitulosubtitulosubtitulosubtitulosubtitulosubtitulosubtitulosubtitulo"
+        android:id="@+id/tvSubTitle_item"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTitle_item"
+        android:layout_centerVertical="true"
+        android:textSize="18sp"
+        android:text="título"
+        android:layout_above="@id/tvSubTitle_item"/>
+</RelativeLayout>

@@ -47,17 +47,17 @@ public class DotLine_View extends RelativeLayout {
                 (LayoutInflater)getContext().getSystemService(infService);
         li.inflate(R.layout.dot_line_view, this, true);
 
-        line = findViewById(R.id.line);
-        dot = findViewById(R.id.dot);
+        this.line = findViewById(R.id.line);
+        this.dot = findViewById(R.id.dot);
 
         if (attrs != null) {
             getXMLValues(attrs);
-            line.setBackgroundColor(colorLine);
+            this.line.setBackgroundColor(colorLine);
             GradientDrawable bgShape = (GradientDrawable)dot.getBackground();
             bgShape.setColor(dotColor);
             bgShape.setStroke(dotBorderWidth, dotBorderColor);
-            dot.getLayoutParams().width = dotSize;
-            dot.getLayoutParams().height = dotSize;
+            this.dot.getLayoutParams().width = dotSize;
+            this.dot.getLayoutParams().height = dotSize;
         }
         else {
             defaultAttributes();
@@ -65,11 +65,11 @@ public class DotLine_View extends RelativeLayout {
     }
 
     private void defaultAttributes() {
-        dotColor = Color.WHITE;
-        colorLine = Color.BLACK;
-        dotBorderColor = colorLine;
-        dotBorderWidth = 2;
-        dotSize = 15;
+        this.dotColor = Color.WHITE;
+        this.colorLine = Color.BLACK;
+        this.dotBorderColor = colorLine;
+        this.dotBorderWidth = 2;
+        this.dotSize = 15;
     }
 
     private void getXMLValues(AttributeSet attrs) {
@@ -79,11 +79,11 @@ public class DotLine_View extends RelativeLayout {
                 0, 0);
 
         try {
-            dotColor = a.getColor(R.styleable.DotLine_View_dotColor, Color.WHITE);
-            colorLine = a.getColor(R.styleable.DotLine_View_lineColor, Color.BLACK);
-            dotBorderColor = a.getColor(R.styleable.DotLine_View_dotBorderColor, Color.BLACK);
-            dotBorderWidth = (int) a.getDimension(R.styleable.DotLine_View_dotBorderWidth, 2);
-            dotSize = (int) a.getDimension(R.styleable.DotLine_View_dotSize,15);
+            this.dotColor = a.getColor(R.styleable.DotLine_View_dotColor, Color.WHITE);
+            this.colorLine = a.getColor(R.styleable.DotLine_View_lineColor, Color.BLACK);
+            this.dotBorderColor = a.getColor(R.styleable.DotLine_View_dotBorderColor, Color.BLACK);
+            this.dotBorderWidth = (int) a.getDimension(R.styleable.DotLine_View_dotBorderWidth, 2);
+            this.dotSize = (int) a.getDimension(R.styleable.DotLine_View_dotSize,15);
         } finally {
             a.recycle();
         }
@@ -91,48 +91,57 @@ public class DotLine_View extends RelativeLayout {
 
     //Getters and setters
     public int getColorLine() {
-        return colorLine;
+        return this.colorLine;
     }
 
     public void setColorLine(int colorLine) {
         this.colorLine = colorLine;
+        this.line.setBackgroundColor(this.colorLine);
     }
 
     public int getDotBorderWidth() {
-        return dotBorderWidth;
+        return this.dotBorderWidth;
     }
 
     public void setDotBorderWidth(int dotBorderWidth) {
         this.dotBorderWidth = dotBorderWidth;
+        GradientDrawable bgShape = (GradientDrawable)dot.getBackground();
+        bgShape.setStroke(this.dotBorderWidth, this.dotBorderColor);
     }
 
     public int getDotColor() {
-        return dotColor;
+        return this.dotColor;
     }
 
     public void setDotColor(int dotColor) {
         this.dotColor = dotColor;
+        GradientDrawable bgShape = (GradientDrawable)dot.getBackground();
+        bgShape.setColor(this.dotColor);
     }
 
     public int getDotBorderColor() {
-        return dotBorderColor;
+        return this.dotBorderColor;
     }
 
     public void setDotBorderColor(int dotBorderColor) {
         this.dotBorderColor = dotBorderColor;
+        GradientDrawable bgShape = (GradientDrawable)dot.getBackground();
+        bgShape.setStroke(this.dotBorderWidth, this.dotBorderColor);
     }
 
     public void setHeigth(int heigth) {
-        ViewGroup.LayoutParams params = line.getLayoutParams();
+        ViewGroup.LayoutParams params = this.line.getLayoutParams();
         params.height = heigth;
-        line.setLayoutParams(params);
+        this.line.setLayoutParams(params);
     }
 
     public int getDotSize() {
-        return dotSize;
+        return this.dotSize;
     }
 
     public void setDotSize(int dotSize) {
         this.dotSize = dotSize;
+        this.dot.getLayoutParams().width = dotSize;
+        this.dot.getLayoutParams().height = dotSize;
     }
 }

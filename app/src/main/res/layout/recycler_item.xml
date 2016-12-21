@@ -25,29 +25,14 @@
         app:dotColor="@color/colorAccent"
         app:dotSize="15dp"
         android:layout_marginEnd="15dp"/>
-    <RelativeLayout
+    <com.yeray697.dotsconnectedrecycler.Message_View
+        android:id="@+id/message_item"
+        android:layout_centerVertical="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_toRightOf="@id/line_and_dot"
         android:layout_toEndOf="@id/line_and_dot"
-        android:background="@drawable/bocadillo"
-        android:layout_centerVertical="true">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvTitle_item"
-            android:layout_centerVertical="true"
-            android:textSize="18sp"
-            android:text="título"/>
+        />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="subtitulo"
-            android:layout_below="@id/tvTitle_item"
-            android:gravity="right"
-            android:id="@+id/tvSubTitle_item"/>
-    </RelativeLayout>
 </RelativeLayout>
 

@@ -7,4 +7,10 @@
         <attr name="dotBorderWidth" format="dimension" />
         <attr name="dotSize" format="dimension" />
     </declare-styleable>
+    <declare-styleable name="Message_View">
+        <attr name="textTitle" format="string" />
+        <attr name="textSubtitle" format="string" />
+        <attr name="textTitleColor" format="color" />
+        <attr name="textSubtitleColor" format="color" />
+    </declare-styleable>
 </resources>
