@@ -19,19 +19,31 @@ public class CustomAdapter extends DotLineRecyclerAdapter {
         super(data);
     }
 
+    public CustomAdapter(ArrayList<RecyclerData> data, int dotMarginLeft) {
+        super(data, dotMarginLeft);
+    }
+
+    public CustomAdapter(ArrayList<RecyclerData> data, ArrayList<Integer> colorList) {
+        super(data, colorList);
+    }
+
+    public CustomAdapter(ArrayList<RecyclerData> data, int dotMarginLeft, ArrayList<Integer> colorList) {
+        super(data, dotMarginLeft, colorList);
+    }
+
     @Override
     public int getDotColor() {
-        return Color.BLUE;
+        return Color.WHITE;
     }
 
     @Override
     public int getDotBorderSize() {
-        return 5;
+        return 10;
     }
 
     @Override
     public int getDotSize() {
-        return 40;
+        return 10;
     }
 
     @Override
@@ -51,6 +63,6 @@ public class CustomAdapter extends DotLineRecyclerAdapter {
 
     @Override
     public int getSeparator() {
-        return 10;
+        return 50;
     }
 }

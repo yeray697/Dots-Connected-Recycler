@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 /**
@@ -21,6 +22,7 @@ import java.util.ArrayList;
  */
 public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLineRecyclerAdapter.Holder> {
 
+    private static final int DEFAULT_DOT_MARGIN_RIGHT = 120;
 
     private final int DOT_BORDER_COLOR = Color.BLACK;
     private final int DOT_COLOR = Color.WHITE;
@@ -33,8 +35,8 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     private ArrayList<RecyclerData> list;
     private int SEPARATOR = 10;
     private int dotMarginLeft;
+    ArrayList<Integer> colorList;
 
-    private static final int DEFAULT_DOT_MARGIN_RIGHT = 120;
 
     //Constructors
     public DotLineRecyclerAdapter(ArrayList<RecyclerData> data) {
@@ -45,6 +47,18 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     public DotLineRecyclerAdapter(ArrayList<RecyclerData> data, int dotMarginLeft) {
         this.list = data;
         this.dotMarginLeft = (dotMarginLeft >= 0 ? dotMarginLeft :0);
+    }
+
+    public DotLineRecyclerAdapter(ArrayList<RecyclerData> data,  ArrayList<Integer> colorList) {
+        this.list = data;
+        this.dotMarginLeft = DEFAULT_DOT_MARGIN_RIGHT;
+        this.colorList = colorList;
+    }
+
+    public DotLineRecyclerAdapter(ArrayList<RecyclerData> data, int dotMarginLeft,  ArrayList<Integer> colorList) {
+        this.list = data;
+        this.dotMarginLeft = (dotMarginLeft >= 0 ? dotMarginLeft :0);
+        this.colorList = colorList;
     }
 
     @Override
@@ -69,15 +83,19 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
             holder.iv_item.setImageDrawable(null);
         holder.message.setTextTitle(aux.getTitle());
         holder.message.setTextSubTitle(aux.getSubtitle());
-        setHolderSettings(holder);
+        setHolderSettings(holder,aux);
     }
 
     /**
      * Called from onBindViewHolder, it sets settings on the view components
-     * @param holder
+     * @param holder Holder that contains the view
+     * @param aux
      */
-    private void setHolderSettings(Holder holder) {
-        holder.dot.setDotBorderColor(getDotBoderColor());
+    private void setHolderSettings(Holder holder, RecyclerData aux) {
+        if (colorList == null || aux.getIdColor() == RecyclerData.NO_ID_COLOR)
+            holder.dot.setDotBorderColor(getDotBoderColor());
+        else
+            holder.dot.setDotBorderColor(colorList.get(aux.getIdColor()));
         holder.dot.setDotColor(getDotColor());
         holder.dot.setDotSize(getDotSize());
         holder.dot.setDotBorderSize(getDotBorderSize());
@@ -103,7 +121,7 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         Message_View message;
         DotView dot;
 
-        public Holder(View itemView) {
+        Holder(View itemView) {
             super(itemView);
             rlItem = (RelativeLayout) itemView.findViewById(R.id.rlItem);
             iv_item = (ImageView) itemView.findViewById(R.id.iv_item);
@@ -157,4 +175,6 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     public int getImageError(){
         return R.mipmap.ic_launcher;
     }
+
+    //TODO add click listeners
 }

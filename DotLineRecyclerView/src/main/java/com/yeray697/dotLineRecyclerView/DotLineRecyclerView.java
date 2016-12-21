@@ -21,6 +21,7 @@ public class DotLineRecyclerView extends RelativeLayout {
     private View line;
     private RecyclerView recyclerView;
 
+    private int margin;
     private int lineColor;
 
     //Constructors
@@ -93,7 +94,8 @@ public class DotLineRecyclerView extends RelativeLayout {
     private void setMarginLine(int margin){
         if (recyclerView.getAdapter() != null) {
             ViewGroup.MarginLayoutParams relativeParams = (ViewGroup.MarginLayoutParams) line.getLayoutParams();
-            relativeParams.setMargins(margin, 0, 0, 0);
+            int lineWidth = (line.getLayoutParams().width / 2) - 5;
+            relativeParams.setMargins((margin - lineWidth), 0, 0, 0);
             line.setLayoutParams(relativeParams);
             line.requestLayout();
         }
@@ -129,7 +131,7 @@ public class DotLineRecyclerView extends RelativeLayout {
      * Set the adapter
      */
     public void setAdapter(RecyclerView.Adapter adapter){
-        int margin = ((DotLineRecyclerAdapter) adapter).getDotMarginLeft();
+        margin = ((DotLineRecyclerAdapter) adapter).getDotMarginLeft();
         margin += (((DotLineRecyclerAdapter) adapter).getDotSize() / 2);
         recyclerView.setAdapter(adapter);
         setMarginLine(margin);
@@ -142,5 +144,9 @@ public class DotLineRecyclerView extends RelativeLayout {
         this.recyclerView.setLayoutManager(layoutManager);
     }
 
-    //TODO set line width (and adapt the new size reducing or expanding the left margin)
+    public void setLineWidth(int width){
+        line.getLayoutParams().width = (int) (getResources().getDisplayMetrics().density * width);
+        setMarginLine(margin);
+
+    }
 }
