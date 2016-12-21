@@ -1,8 +1,10 @@
 package com.yeray697.dotLineRecyclerView;
 
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -109,6 +111,31 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
                 return false;
             }
         });
+        if (mCallbackImageClick != null || mCallbackImageLongClick != null) {
+            holder.iv_item.setOnTouchListener(new View.OnTouchListener() {
+                Rect rect;
+
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        holder.iv_item.setColorFilter(Color.argb(50, 0, 0, 0));
+                        rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
+                    }
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        holder.iv_item.setColorFilter(Color.argb(0, 0, 0, 0));
+                    }
+                    if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                        if (!rect.contains(v.getLeft() + (int) event.getX(), v.getTop() + (int) event.getY())) {
+                            holder.iv_item.setColorFilter(Color.argb(0, 0, 0, 0));
+                        }
+                    }
+                    if (event.getAction() == MotionEvent.ACTION_CANCEL) {
+                        holder.iv_item.setColorFilter(Color.argb(0, 0, 0, 0));
+                    }
+                    return false;
+                }
+            });
+        }
         holder.dot.setOnDotClickListener(mCallbackDotClick);
         holder.dot.setOnDotLongClickListener(mCallbackDotLongClick);
         holder.message.setOnMessageClickListener(mCallbackMessageClick);
