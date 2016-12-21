@@ -1,6 +1,5 @@
 package com.yeray697.dotsconnectedrecycler;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,10 +12,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-/**
- * Created by yeray697 on 20/12/16.
- */
 
+/**
+ * DotLineRecycler's adapter
+ * @author yeray697
+ * @version 1.0
+ * Created on 21/12/16.
+ */
 public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLineRecyclerAdapter.Holder> {
 
 
@@ -24,22 +26,27 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     private final int DOT_COLOR = Color.WHITE;
     private final int DOT_SIZE = 30;
     private final int DOT_BORDER_SIZE = 2;
-    private final int DOT_MARGIN_TOP = 15;
-    private final int DOT_MARGIN_RIGHT = 0;
-    private final int DOT_MARGIN_LEFT = 0;
-    private final int DOT_MARGIN_BOTTOM = 0;
 
     private final int TEXT_TITLE_COLOR = Color.GRAY;
     private final int TEXT_SUBTITLE_COLOR  = Color.GRAY;
-    private Context context;
 
     private ArrayList<RecyclerData> list;
     private int SEPARATOR = 10;
+    private int dotMarginLeft;
 
-    public DotLineRecyclerAdapter(Context context, ArrayList<RecyclerData> data){
+    private static final int DEFAULT_DOT_MARGIN_RIGHT = 120;
+
+    //Constructors
+    public DotLineRecyclerAdapter(ArrayList<RecyclerData> data) {
         this.list = data;
-        this.context = context;
+        this.dotMarginLeft = DEFAULT_DOT_MARGIN_RIGHT;
     }
+
+    public DotLineRecyclerAdapter(ArrayList<RecyclerData> data, int dotMarginLeft) {
+        this.list = data;
+        this.dotMarginLeft = (dotMarginLeft >= 0 ? dotMarginLeft :0);
+    }
+
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item,parent,false);
@@ -48,7 +55,6 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
 
     @Override
     public void onBindViewHolder(final Holder holder, int position) {
-        final boolean[] changed = new boolean[1];
         RecyclerData aux = list.get(position);
         if (aux.isImageADrawable()){
             holder.iv_item.setImageDrawable(aux.getImage());
@@ -66,16 +72,16 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         setHolderSettings(holder);
     }
 
+    /**
+     * Called from onBindViewHolder, it sets settings on the view components
+     * @param holder
+     */
     private void setHolderSettings(Holder holder) {
-        //line_and_dot component
-        holder.line_and_dot.setDotBorderColor(getDotBoderColor());
-        holder.line_and_dot.setDotColor(getDotColor());
-        holder.line_and_dot.setDotSize(getDotSize());
-        holder.line_and_dot.setDotBorderSize(getDotBorderSize());
-        holder.line_and_dot.setDotMarginTop(getDotMarginTop());
-        holder.line_and_dot.setDotMarginBottom(getDotMarginBottom());
-        holder.line_and_dot.setDotMarginLeft(getDotMarginLeft());
-        holder.line_and_dot.setDotMarginRight(getDotMarginRight());
+        holder.dot.setDotBorderColor(getDotBoderColor());
+        holder.dot.setDotColor(getDotColor());
+        holder.dot.setDotSize(getDotSize());
+        holder.dot.setDotBorderSize(getDotBorderSize());
+        holder.dot.setDotMarginLeft(getDotMarginLeft());
 
         holder.message.setTextSubTitleColor(getTextSubtitleColor());
         holder.message.setTextTitleColor(getTextTitleColor());
@@ -95,19 +101,28 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         RelativeLayout rlItem;
         ImageView iv_item;
         Message_View message;
-        DotLine_View line_and_dot;
+        DotView dot;
 
         public Holder(View itemView) {
             super(itemView);
             rlItem = (RelativeLayout) itemView.findViewById(R.id.rlItem);
             iv_item = (ImageView) itemView.findViewById(R.id.iv_item);
             message = (Message_View) itemView.findViewById(R.id.message_item);
-            line_and_dot = (DotLine_View) itemView.findViewById(R.id.line_and_dot);
+            dot = (DotView) itemView.findViewById(R.id.line_and_dot);
         }
     }
 
-    public Context getContext() {
-        return context;
+    /**
+     * Returns the item at X position
+     * @param position Item position
+     * @return Return the item
+     */
+    public RecyclerData getItemAtPosition(int position){
+        return list.get(position);
+    }
+
+    public final int getDotMarginLeft() {
+        return dotMarginLeft;
     }
 
     //Methods to override
@@ -121,22 +136,6 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
 
     public int getDotColor() {
         return DOT_COLOR;
-    }
-
-    public int getDotMarginBottom() {
-        return DOT_MARGIN_BOTTOM;
-    }
-
-    public int getDotMarginLeft() {
-        return DOT_MARGIN_LEFT;
-    }
-
-    public int getDotMarginRight() {
-        return DOT_MARGIN_RIGHT;
-    }
-
-    public int getDotMarginTop() {
-        return DOT_MARGIN_TOP;
     }
 
     public int getDotSize() {

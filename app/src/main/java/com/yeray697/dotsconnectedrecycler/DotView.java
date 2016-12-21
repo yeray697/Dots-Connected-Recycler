@@ -7,14 +7,15 @@ import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 /**
- * Created by yeray697 on 20/12/16.
+ * DotView component
+ * @author yeray697
+ * @version 1.0
+ * Created on 20/12/16.
  */
-
-public class DotLine_View extends RelativeLayout {
+public class DotView extends RelativeLayout {
     private View dot;
 
     private int dotBorderColor;
@@ -27,73 +28,77 @@ public class DotLine_View extends RelativeLayout {
     private int dotMarginBottom;
 
     //Constructors
-    public DotLine_View(Context context, AttributeSet attrs, int defStyle){
+    public DotView(Context context, AttributeSet attrs, int defStyle){
         super(context, attrs, defStyle);
         initialize(attrs);
     }
 
-    public DotLine_View(Context context) {
+    public DotView(Context context) {
         super(context);
         initialize(null);
     }
 
-    public DotLine_View(Context context, AttributeSet attrs) {
+    public DotView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize(attrs);
     }
 
     //Privated methods
+    /**
+     * Inflate the view and set the attributes if they  are not null
+     * @param attrs XML Attributes
+     */
     private void initialize(AttributeSet attrs) {
         String infService = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater li =
                 (LayoutInflater)getContext().getSystemService(infService);
-        li.inflate(R.layout.dot_line_view, this, true);
+        li.inflate(R.layout.dot_view, this, true);
 
-        //this.line = findViewById(R.id.line);
         this.dot = findViewById(R.id.dot);
 
         if (attrs != null) {
             getXMLValues(attrs);
-            //this.line.setBackgroundColor(lineColor);
-            //this.line.getLayoutParams().height = this.lineHeight;
-            GradientDrawable bgShape = (GradientDrawable)dot.getBackground();
-            bgShape.setColor(dotColor);
-            bgShape.setStroke(dotBorderWidth, dotBorderColor);
-            this.dot.getLayoutParams().width = dotSize;
-            this.dot.getLayoutParams().height = dotSize;
-            ((LayoutParams)this.dot.getLayoutParams()).setMargins(dotMarginLeft,dotMarginTop, dotMarginRight,dotMarginBottom);
         }
         else {
             defaultAttributes();
         }
     }
 
+    /**
+     * Setting default attributes
+     */
     private void defaultAttributes() {
-        this.dotColor = Color.WHITE;
-        this.dotBorderColor = Color.BLACK;
-        this.dotBorderWidth = 2;
-        this.dotSize = 15;
-        this.dotMarginTop = 8;
-        this.dotMarginLeft= 0;
-        this.dotMarginRight = 0;
-        this.dotMarginBottom = 0;
+        setDotColor(Color.WHITE);
+        setDotBorderColor(Color.BLACK);
+        setDotBorderSize(2);
+        setDotSize(15);
+        setDotMarginTop(8);
+        setDotMarginLeft(0);
+        setDotMarginRight(0);
+        setDotMarginBottom(0);
     }
 
+    /**
+     * Get attributes from xml declaration
+     * @param attrs XML Attribues
+     */
     private void getXMLValues(AttributeSet attrs) {
         TypedArray a = getContext().getTheme().obtainStyledAttributes(
                 attrs,
-                R.styleable.DotLine_View,
+                R.styleable.DotView,
                 0, 0);
 
         try {
-            this.dotColor = a.getColor(R.styleable.DotLine_View_dotColor, Color.WHITE);
-            this.dotBorderColor = a.getColor(R.styleable.DotLine_View_dotBorderColor, Color.BLACK);
-            this.dotBorderWidth = (int) a.getDimension(R.styleable.DotLine_View_dotBorderWidth, 2);
-            this.dotSize = (int) a.getDimension(R.styleable.DotLine_View_dotSize,15);
-            this.dotMarginTop = (int) a.getDimension(R.styleable.DotLine_View_dotMarginTop, 0);
-            this.dotMarginLeft = (int) a.getDimension(R.styleable.DotLine_View_dotMarginLeft, 0);
-            this.dotMarginRight = (int) a.getDimension(R.styleable.DotLine_View_dotMarginRight, 0);
-            this.dotMarginBottom = (int) a.getDimension(R.styleable.DotLine_View_dotMarginBottom, 0);
+            setDotColor(a.getColor(R.styleable.DotView_dotColor, Color.WHITE));
+            setDotBorderColor(a.getColor(R.styleable.DotView_dotBorderColor, Color.BLACK));
+            setDotBorderSize((int) a.getDimension(R.styleable.DotView_dotBorderWidth, 2));
+            setDotSize((int) a.getDimension(R.styleable.DotView_dotSize,15));
+            this.dotMarginTop = (int) a.getDimension(R.styleable.DotView_dotMarginTop, 0);
+            this.dotMarginLeft = (int) a.getDimension(R.styleable.DotView_dotMarginLeft, 0);
+            this.dotMarginRight = (int) a.getDimension(R.styleable.DotView_dotMarginRight, 0);
+            this.dotMarginBottom = (int) a.getDimension(R.styleable.DotView_dotMarginBottom, 0);
+            ((LayoutParams)this.dot.getLayoutParams()).setMargins(dotMarginLeft,dotMarginTop, dotMarginRight,dotMarginBottom);
+
         } finally {
             a.recycle();
         }

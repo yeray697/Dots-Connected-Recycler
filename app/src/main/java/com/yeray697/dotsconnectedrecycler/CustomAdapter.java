@@ -1,28 +1,29 @@
 package com.yeray697.dotsconnectedrecycler;
 
-import android.content.Context;
 import android.graphics.Color;
 
 import java.util.ArrayList;
 
 /**
- * Created by usuario on 21/12/16.
+ * Custom adapter that extends from DotLineRecyclerAdapter used as example
+ * @author yeray697
+ * @version 1.0
+ * Created on 21/12/16.
  */
-
 public class CustomAdapter extends DotLineRecyclerAdapter {
 
-    public CustomAdapter(Context context, ArrayList<RecyclerData> data) {
-        super(context, data);
+    public CustomAdapter(ArrayList<RecyclerData> data) {
+        super(data);
     }
 
     @Override
     public int getDotColor() {
-        return Color.YELLOW;
+        return Color.BLUE;
     }
 
     @Override
     public int getDotBorderSize() {
-        return 10;
+        return 5;
     }
 
     @Override
@@ -37,17 +38,12 @@ public class CustomAdapter extends DotLineRecyclerAdapter {
 
     @Override
     public int getDotBoderColor() {
-        return Color.BLUE;
-    }
-
-    @Override
-    public int getDotMarginTop() {
-        return super.getDotMarginTop();
+        return Color.GRAY;
     }
 
     @Override
     public int getTextSubtitleColor() {
-        return Color.CYAN;
+        return Color.GRAY;
     }
 
     @Override

@@ -10,10 +10,13 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-/**
- * Created by usuario on 21/12/16.
- */
 
+/**
+ * Message view component
+ * @author yeray697
+ * @version 1.0
+ * Created on 21/12/16.
+ */
 public class Message_View extends RelativeLayout {
     private TextView tvTitle;
     private TextView tvSubTitle;
@@ -42,6 +45,10 @@ public class Message_View extends RelativeLayout {
     }
 
     //Privated methods
+    /**
+     * Inflate the view and set the attributes if they  are not null
+     * @param attrs XML Attributes
+     */
     private void initialize(AttributeSet attrs) {
         String infService = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater li =
@@ -60,13 +67,20 @@ public class Message_View extends RelativeLayout {
         }
     }
 
+    /**
+     * Setting default attributes
+     */
     private void defaultAttributes() {
-        textTitle = "Title";
-        textSubTitle = "Subtitle";
-        textTitleColor = Color.BLACK;
-        textSubTitleColor = Color.BLACK;
+        setTextTitle("Title");
+        setTextSubTitle("Subtitle");
+        setTextTitleColor(Color.BLACK);
+        setTextSubTitleColor(Color.BLACK);
     }
 
+    /**
+     * Get attributes from xml declaration
+     * @param attrs XML Attribues
+     */
     private void getXMLValues(AttributeSet attrs) {
         TypedArray a = getContext().getTheme().obtainStyledAttributes(
                 attrs,
@@ -74,14 +88,16 @@ public class Message_View extends RelativeLayout {
                 0, 0);
 
         try {
-            textTitle = a.getString(R.styleable.Message_View_textTitle);
-            textSubTitle = a.getString(R.styleable.Message_View_textSubtitle);
-            textTitleColor = a.getColor(R.styleable.Message_View_textTitleColor, Color.BLACK);
-            textSubTitleColor = a.getColor(R.styleable.Message_View_textSubtitleColor, 2);
+            setTextTitle(a.getString(R.styleable.Message_View_textTitle));
+            setTextSubTitle(a.getString(R.styleable.Message_View_textSubtitle));
+            setTextTitleColor(a.getColor(R.styleable.Message_View_textTitleColor, Color.BLACK));
+            setTextSubTitleColor(a.getColor(R.styleable.Message_View_textSubtitleColor, 2));
         } finally {
             a.recycle();
         }
     }
+
+    //Getters and setters
 
     public String getTextSubTitle() {
         return textSubTitle;

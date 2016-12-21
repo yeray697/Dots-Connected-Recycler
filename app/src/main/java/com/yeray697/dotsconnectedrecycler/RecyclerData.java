@@ -7,9 +7,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Created by yeray697 on 20/12/16.
+ * Data used in DotLineRecyclerView
+ * @author yeray697
+ * @version 1.0
+ * Created on 20/12/16.
  */
-
 public class RecyclerData {
 
     private int imageResource;
@@ -31,6 +33,7 @@ public class RecyclerData {
     }
 
     //Constructors
+    //TODO constructors with priority
     public RecyclerData(String imageUrl, String title, String subtitle) {
 
         this.imageUrl = imageUrl;
@@ -65,14 +68,26 @@ public class RecyclerData {
     }
 
     //Methods
+    /**
+     * Return if there is a drawable associated
+     * @return Return if there is a drawable associated
+     */
     public boolean isImageADrawable(){
         return image != null;
     }
 
+    /**
+     * Return if there is an URL associated
+     * @return Return if there is an URL associated
+     */
     public boolean isImageAnURL(){
         return !imageUrl.equals(EMPTY_URL);
     }
 
+    /**
+     * Return if there is a resource associated
+     * @return Return if there is a resource associated
+     */
     public boolean isImageAResource(){
         return imageResource != EMPTY_RESOURCE;
     }

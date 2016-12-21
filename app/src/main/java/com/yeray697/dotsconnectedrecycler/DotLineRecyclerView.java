@@ -3,17 +3,20 @@ package com.yeray697.dotsconnectedrecycler;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 /**
- * Created by usuario on 21/12/16.
+ * Recycler view component
+ * @author yeray697
+ * @version 1.0
+ * Created on 21/12/16.
  */
-
 public class DotLineRecyclerView extends RelativeLayout {
     private View line;
     private RecyclerView recyclerView;
@@ -37,6 +40,11 @@ public class DotLineRecyclerView extends RelativeLayout {
     }
 
     //Privated methods
+
+    /**
+     * Inflate the view and set the attributes if they  are not null
+     * @param attrs XML Attributes
+     */
     private void initialize(AttributeSet attrs) {
         String infService = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater li =
@@ -48,17 +56,23 @@ public class DotLineRecyclerView extends RelativeLayout {
 
         if (attrs != null) {
             getXMLValues(attrs);
-
         }
         else {
             defaultAttributes();
         }
     }
 
+    /**
+     * Setting default attributes
+     */
     private void defaultAttributes() {
-        lineColor = Color.BLACK;
+        setLineColor(Color.BLACK);
     }
 
+    /**
+     * Get attributes from xml declaration
+     * @param attrs XML Attribues
+     */
     private void getXMLValues(AttributeSet attrs) {
         TypedArray a = getContext().getTheme().obtainStyledAttributes(
                 attrs,
@@ -66,22 +80,67 @@ public class DotLineRecyclerView extends RelativeLayout {
                 0, 0);
 
         try {
-            lineColor = a.getColor(R.styleable.DotLineRecyclerView_lineColor, Color.BLACK);
+            setLineColor(a.getColor(R.styleable.DotLineRecyclerView_lineColor, Color.BLACK));
         } finally {
             a.recycle();
         }
     }
 
+    /**
+     * Set the left margin from the line
+     * @param margin Margin to set
+     */
+    private void setMarginLine(int margin){
+        if (recyclerView.getAdapter() != null) {
+            ViewGroup.MarginLayoutParams relativeParams = (ViewGroup.MarginLayoutParams) line.getLayoutParams();
+            relativeParams.setMargins(margin, 0, 0, 0);
+            line.setLayoutParams(relativeParams);
+            line.requestLayout();
+        }
+    }
+
+    //Getters and setters
+
+    /**
+     * Get the recyclerView
+     * @return RecyclerView used
+     */
     public RecyclerView getRecyclerView() {
         return recyclerView;
     }
 
+    /**
+     * Get the color used in the line
+     * @return Color used
+     */
     public int getLineColor() {
         return lineColor;
     }
 
+    /**
+     * Set the color used in the line
+     */
     public void setLineColor(int lineColor) {
         this.lineColor = lineColor;
         line.setBackgroundColor(this.lineColor);
     }
+
+    /**
+     * Set the adapter
+     */
+    public void setAdapter(RecyclerView.Adapter adapter){
+        int margin = ((DotLineRecyclerAdapter) adapter).getDotMarginLeft();
+        margin += (((DotLineRecyclerAdapter) adapter).getDotSize() / 2);
+        recyclerView.setAdapter(adapter);
+        setMarginLine(margin);
+    }
+
+    /**
+     * Set the layout manager
+     */
+    public void setLayoutManager(LinearLayoutManager layoutManager) {
+        this.recyclerView.setLayoutManager(layoutManager);
+    }
+
+    //TODO set line width (and adapt the new size reducing or expanding the left margin)
 }

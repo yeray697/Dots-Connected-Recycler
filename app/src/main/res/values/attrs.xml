@@ -3,15 +3,15 @@
     <declare-styleable name="DotLineRecyclerView">
         <attr name="lineColor" format="color" />
     </declare-styleable>
-    <declare-styleable name="DotLine_View">
+    <declare-styleable name="DotView">
         <attr name="dotColor" format="color" />
         <attr name="dotBorderColor" format="color" />
         <attr name="dotBorderWidth" format="dimension" />
         <attr name="dotSize" format="dimension" />
         <attr name="dotMarginTop" format="dimension" />
         <attr name="dotMarginBottom" format="dimension" />
-        <attr name="dotMarginRight" format="dimension" />
         <attr name="dotMarginLeft" format="dimension" />
+        <attr name="dotMarginRight" format="dimension" />
     </declare-styleable>
     <declare-styleable name="Message_View">
         <attr name="textTitle" format="string" />

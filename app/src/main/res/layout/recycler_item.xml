@@ -12,19 +12,17 @@
         android:layout_height="38dp"
         android:layout_gravity="center"
         android:id="@+id/iv_item"/>
-    <com.yeray697.dotsconnectedrecycler.DotLine_View
+    <com.yeray697.dotsconnectedrecycler.DotView
         android:id="@+id/line_and_dot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/iv_item"
-        android:layout_toEndOf="@id/iv_item"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="15dp"/>
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"/>
     <com.yeray697.dotsconnectedrecycler.Message_View
         android:id="@+id/message_item"
         android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/line_and_dot"
         android:layout_toEndOf="@id/line_and_dot"

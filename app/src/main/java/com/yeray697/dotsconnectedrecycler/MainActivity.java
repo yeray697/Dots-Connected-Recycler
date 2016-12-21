@@ -23,11 +23,12 @@ public class MainActivity extends AppCompatActivity {
         data = new ArrayList<>();
         data.add(new RecyclerData(R.mipmap.ic_launcher, "Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1", "aaaaaaaaaaaa"));
         data.add(new RecyclerData(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_launcher), "Title 2", "10:05"));
+        data.add(new RecyclerData("Title 3", "10:05"));
 
-        adapter = new CustomAdapter(this, data);
+        adapter = new CustomAdapter(data);
         recyclerView = ((DotLineRecyclerView) findViewById(R.id.recyclerView));
-        recyclerView.getRecyclerView().setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recyclerView.getRecyclerView().setAdapter(adapter);
-        recyclerView.setLineColor(Color.YELLOW);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setLineColor(Color.GRAY);
     }
 }
