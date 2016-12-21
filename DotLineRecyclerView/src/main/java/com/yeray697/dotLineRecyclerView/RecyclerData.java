@@ -1,4 +1,4 @@
-package com.yeray697.dotsconnectedrecycler;
+package com.yeray697.dotLineRecyclerView;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IntDef;
@@ -14,26 +14,55 @@ import java.lang.annotation.RetentionPolicy;
  */
 public class RecyclerData {
 
+    public static final int NO_ID_COLOR = -1;
     private int imageResource;
     private Drawable image;
     private String imageUrl;
-
     private String title;
     private String subtitle;
+    private int idColor;
 
     private final int EMPTY_RESOURCE = -1;
     private final String EMPTY_URL = "-1";
 
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({Priority.LOW, Priority.MEDIUM, Priority.HIGH})
-    public @interface Priority {
-        int LOW = 1;
-        int MEDIUM = 2;
-        int HIGH = 3;
+    //Constructors
+    public RecyclerData(String imageUrl, String title, String subtitle, int idColor) {
+
+        this.imageUrl = imageUrl;
+        this.title = title;
+        this.subtitle = subtitle;
+        this.imageResource = EMPTY_RESOURCE;
+        this.image = null;
+        this.idColor = idColor;
     }
 
-    //Constructors
-    //TODO constructors with priority
+    public RecyclerData(int imageResource, String title, String subtitle, int idColor) {
+        this.imageResource = imageResource;
+        this.title = title;
+        this.subtitle = subtitle;
+        this.image = null;
+        this.imageUrl = EMPTY_URL;
+        this.idColor = idColor;
+    }
+
+    public RecyclerData(Drawable image, String title, String subtitle, int idColor) {
+        this.image = image;
+        this.title = title;
+        this.subtitle = subtitle;
+        this.imageResource = EMPTY_RESOURCE;
+        this.imageUrl = EMPTY_URL;
+        this.idColor = idColor;
+    }
+
+    public RecyclerData(String title, String subtitle, int idColor) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.image = null;
+        this.imageResource = EMPTY_RESOURCE;
+        this.imageUrl = EMPTY_URL;
+        this.idColor = idColor;
+    }
+
     public RecyclerData(String imageUrl, String title, String subtitle) {
 
         this.imageUrl = imageUrl;
@@ -41,6 +70,7 @@ public class RecyclerData {
         this.subtitle = subtitle;
         this.imageResource = EMPTY_RESOURCE;
         this.image = null;
+        this.idColor = NO_ID_COLOR;
     }
 
     public RecyclerData(int imageResource, String title, String subtitle) {
@@ -49,6 +79,7 @@ public class RecyclerData {
         this.subtitle = subtitle;
         this.image = null;
         this.imageUrl = EMPTY_URL;
+        this.idColor = NO_ID_COLOR;
     }
 
     public RecyclerData(Drawable image, String title, String subtitle) {
@@ -57,6 +88,7 @@ public class RecyclerData {
         this.subtitle = subtitle;
         this.imageResource = EMPTY_RESOURCE;
         this.imageUrl = EMPTY_URL;
+        this.idColor = NO_ID_COLOR;
     }
 
     public RecyclerData(String title, String subtitle) {
@@ -65,6 +97,7 @@ public class RecyclerData {
         this.image = null;
         this.imageResource = EMPTY_RESOURCE;
         this.imageUrl = EMPTY_URL;
+        this.idColor = NO_ID_COLOR;
     }
 
     //Methods
@@ -138,5 +171,13 @@ public class RecyclerData {
 
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
+    }
+
+    public int getIdColor() {
+        return idColor;
+    }
+
+    public void setIdColor(int idColor) {
+        this.idColor = idColor;
     }
 }

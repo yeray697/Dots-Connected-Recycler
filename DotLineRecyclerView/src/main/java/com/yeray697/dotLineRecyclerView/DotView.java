@@ -1,4 +1,4 @@
-package com.yeray697.dotsconnectedrecycler;
+package com.yeray697.dotLineRecyclerView;
 
 import android.content.Context;
 import android.content.res.TypedArray;

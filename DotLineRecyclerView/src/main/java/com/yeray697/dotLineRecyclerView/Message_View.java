@@ -1,4 +1,4 @@
-package com.yeray697.dotsconnectedrecycler;
+package com.yeray697.dotLineRecyclerView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -138,4 +138,6 @@ public class Message_View extends RelativeLayout {
         this.textTitleColor = textTitleColor;
         this.tvTitle.setTextColor(this.textTitleColor);
     }
+
+    //TODO add methods to modify text appearance
 }

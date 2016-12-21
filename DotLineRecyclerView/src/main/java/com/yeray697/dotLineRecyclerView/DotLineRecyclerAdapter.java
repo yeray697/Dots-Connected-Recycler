@@ -1,4 +1,4 @@
-package com.yeray697.dotsconnectedrecycler;
+package com.yeray697.dotLineRecyclerView;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -63,7 +63,7 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         } else if (aux.isImageAnURL()){
             Picasso.with(holder.iv_item.getContext())
                     .load(aux.getImageUrl())
-                    .error(R.mipmap.ic_launcher)
+                    .error(getImageError())
                     .into(holder.iv_item);
         } else
             holder.iv_item.setImageDrawable(null);
@@ -152,5 +152,9 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
 
     public int getSeparator(){
         return SEPARATOR;
+    }
+
+    public int getImageError(){
+        return R.mipmap.ic_launcher;
     }
 }

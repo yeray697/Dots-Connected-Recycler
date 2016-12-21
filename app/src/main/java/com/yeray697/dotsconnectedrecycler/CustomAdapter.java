@@ -2,6 +2,9 @@ package com.yeray697.dotsconnectedrecycler;
 
 import android.graphics.Color;
 
+import com.yeray697.dotLineRecyclerView.DotLineRecyclerAdapter;
+import com.yeray697.dotLineRecyclerView.RecyclerData;
+
 import java.util.ArrayList;
 
 /**
