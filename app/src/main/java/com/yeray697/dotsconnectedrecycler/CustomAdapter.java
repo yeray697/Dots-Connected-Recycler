@@ -36,11 +36,6 @@ public class CustomAdapter extends DotLineRecyclerAdapter {
     }
 
     @Override
-    public int getColorLine() {
-        return Color.RED;
-    }
-
-    @Override
     public int getDotBoderColor() {
         return Color.BLUE;
     }
@@ -53,5 +48,10 @@ public class CustomAdapter extends DotLineRecyclerAdapter {
     @Override
     public int getTextSubtitleColor() {
         return Color.CYAN;
+    }
+
+    @Override
+    public int getSeparator() {
+        return 10;
     }
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     DotLineRecyclerAdapter adapter;
     ArrayList<RecyclerData> data;
+    DotLineRecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,35 +23,11 @@ public class MainActivity extends AppCompatActivity {
         data = new ArrayList<>();
         data.add(new RecyclerData(R.mipmap.ic_launcher, "Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1", "aaaaaaaaaaaa"));
         data.add(new RecyclerData(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_launcher), "Title 2", "10:05"));
-        data.add(new RecyclerData("Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3", ""));
-        data.add(new RecyclerData("http://findicons.com/files/icons/367/ifunny/128/dog.png", "Title 4", ""));
-        data.add(new RecyclerData(R.mipmap.ic_launcher, "Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1", "aaaaaaaaaaaa"));
-        data.add(new RecyclerData(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_launcher), "Title 2", "10:05"));
-        data.add(new RecyclerData("Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3", ""));
-        data.add(new RecyclerData("http://findicons.com/files/icons/367/ifunny/128/dog.png", "Title 4", ""));
-        data.add(new RecyclerData(R.mipmap.ic_launcher, "Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1", "aaaaaaaaaaaa"));
-        data.add(new RecyclerData(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_launcher), "Title 2", "10:05"));
-        data.add(new RecyclerData("Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3", ""));
-        data.add(new RecyclerData("http://findicons.com/files/icons/367/ifunny/128/dog.png", "Title 4", ""));
-        data.add(new RecyclerData(R.mipmap.ic_launcher, "Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1", "aaaaaaaaaaaa"));
-        data.add(new RecyclerData(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_launcher), "Title 2", "10:05"));
-        data.add(new RecyclerData("Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3", ""));
-        data.add(new RecyclerData("http://findicons.com/files/icons/367/ifunny/128/dog.png", "Title 4", ""));
-        data.add(new RecyclerData(R.mipmap.ic_launcher, "Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1", "aaaaaaaaaaaa"));
-        data.add(new RecyclerData(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_launcher), "Title 2", "10:05"));
-        data.add(new RecyclerData("Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3", ""));
-        data.add(new RecyclerData("http://findicons.com/files/icons/367/ifunny/128/dog.png", "Title 4", ""));
-        data.add(new RecyclerData(R.mipmap.ic_launcher, "Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1", "aaaaaaaaaaaa"));
-        data.add(new RecyclerData(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_launcher), "Title 2", "10:05"));
-        data.add(new RecyclerData("Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3", ""));
-        data.add(new RecyclerData("http://findicons.com/files/icons/367/ifunny/128/dog.png", "Title 4", ""));
-        data.add(new RecyclerData(R.mipmap.ic_launcher, "Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1Title1", "aaaaaaaaaaaa"));
-        data.add(new RecyclerData(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_launcher), "Title 2", "10:05"));
-        data.add(new RecyclerData("Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3Title 3", ""));
-        data.add(new RecyclerData("http://findicons.com/files/icons/367/ifunny/128/dog.png", "Title 4", ""));
 
         adapter = new CustomAdapter(this, data);
-        ((RecyclerView) findViewById(R.id.recyclerView)).setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        ((RecyclerView) findViewById(R.id.recyclerView)).setAdapter(adapter);
+        recyclerView = ((DotLineRecyclerView) findViewById(R.id.recyclerView));
+        recyclerView.getRecyclerView().setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.getRecyclerView().setAdapter(adapter);
+        recyclerView.setLineColor(Color.YELLOW);
     }
 }

@@ -15,11 +15,8 @@ import android.widget.RelativeLayout;
  */
 
 public class DotLine_View extends RelativeLayout {
-    private View line;
     private View dot;
 
-    private int lineColor;
-    private int lineHeight;
     private int dotBorderColor;
     private int dotColor;
     private int dotSize;
@@ -52,13 +49,13 @@ public class DotLine_View extends RelativeLayout {
                 (LayoutInflater)getContext().getSystemService(infService);
         li.inflate(R.layout.dot_line_view, this, true);
 
-        this.line = findViewById(R.id.line);
+        //this.line = findViewById(R.id.line);
         this.dot = findViewById(R.id.dot);
 
         if (attrs != null) {
             getXMLValues(attrs);
-            this.line.setBackgroundColor(lineColor);
-            this.line.getLayoutParams().height = this.lineHeight;
+            //this.line.setBackgroundColor(lineColor);
+            //this.line.getLayoutParams().height = this.lineHeight;
             GradientDrawable bgShape = (GradientDrawable)dot.getBackground();
             bgShape.setColor(dotColor);
             bgShape.setStroke(dotBorderWidth, dotBorderColor);
@@ -72,10 +69,8 @@ public class DotLine_View extends RelativeLayout {
     }
 
     private void defaultAttributes() {
-        this.lineColor = Color.BLACK;
-        this.lineHeight = 200;
         this.dotColor = Color.WHITE;
-        this.dotBorderColor = lineColor;
+        this.dotBorderColor = Color.BLACK;
         this.dotBorderWidth = 2;
         this.dotSize = 15;
         this.dotMarginTop = 8;
@@ -91,8 +86,6 @@ public class DotLine_View extends RelativeLayout {
                 0, 0);
 
         try {
-            this.lineColor = a.getColor(R.styleable.DotLine_View_lineColor, Color.BLACK);
-            this.lineHeight = (int) a.getDimension(R.styleable.DotLine_View_lineHeight, 200);
             this.dotColor = a.getColor(R.styleable.DotLine_View_dotColor, Color.WHITE);
             this.dotBorderColor = a.getColor(R.styleable.DotLine_View_dotBorderColor, Color.BLACK);
             this.dotBorderWidth = (int) a.getDimension(R.styleable.DotLine_View_dotBorderWidth, 2);
@@ -107,15 +100,6 @@ public class DotLine_View extends RelativeLayout {
     }
 
     //Getters and setters
-    public int getLineColor() {
-        return this.lineColor;
-    }
-
-    public void setLineColor(int lineColor) {
-        this.lineColor = lineColor;
-        this.line.setBackgroundColor(this.lineColor);
-    }
-
     public int getDotBorderWidth() {
         return this.dotBorderWidth;
     }
@@ -144,11 +128,6 @@ public class DotLine_View extends RelativeLayout {
         this.dotBorderColor = dotBorderColor;
         GradientDrawable bgShape = (GradientDrawable)dot.getBackground();
         bgShape.setStroke(this.dotBorderWidth, this.dotBorderColor);
-    }
-
-    public void setHeight(int heigth) {
-        this.lineHeight = heigth;
-        this.line.getLayoutParams().height = this.lineHeight;
     }
 
     public int getDotSize() {

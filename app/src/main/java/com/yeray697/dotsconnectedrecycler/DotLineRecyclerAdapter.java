@@ -22,7 +22,6 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
 
     private final int DOT_BORDER_COLOR = Color.BLACK;
     private final int DOT_COLOR = Color.WHITE;
-    private final int COLOR_LINE = Color.BLACK;
     private final int DOT_SIZE = 30;
     private final int DOT_BORDER_SIZE = 2;
     private final int DOT_MARGIN_TOP = 15;
@@ -35,7 +34,7 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     private Context context;
 
     private ArrayList<RecyclerData> list;
-    private int separator = 6;
+    private int SEPARATOR = 10;
 
     public DotLineRecyclerAdapter(Context context, ArrayList<RecyclerData> data){
         this.list = data;
@@ -71,7 +70,6 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         //line_and_dot component
         holder.line_and_dot.setDotBorderColor(getDotBoderColor());
         holder.line_and_dot.setDotColor(getDotColor());
-        holder.line_and_dot.setLineColor(getColorLine());
         holder.line_and_dot.setDotSize(getDotSize());
         holder.line_and_dot.setDotBorderSize(getDotBorderSize());
         holder.line_and_dot.setDotMarginTop(getDotMarginTop());
@@ -82,6 +80,10 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         holder.message.setTextSubTitleColor(getTextSubtitleColor());
         holder.message.setTextTitleColor(getTextTitleColor());
 
+        ViewGroup.MarginLayoutParams relativeParams = (ViewGroup.MarginLayoutParams) holder.rlItem.getLayoutParams();
+        relativeParams.setMargins(5, 0, 5, getSeparator() * 4);
+        holder.rlItem.setLayoutParams(relativeParams);
+        holder.rlItem.requestLayout();
     }
 
     @Override
@@ -109,10 +111,6 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     }
 
     //Methods to override
-    public int getColorLine() {
-        return COLOR_LINE;
-    }
-
     public int getDotBoderColor() {
         return DOT_BORDER_COLOR;
     }
@@ -151,5 +149,9 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
 
     public int getTextTitleColor() {
         return TEXT_TITLE_COLOR;
+    }
+
+    public int getSeparator(){
+        return SEPARATOR;
     }
 }

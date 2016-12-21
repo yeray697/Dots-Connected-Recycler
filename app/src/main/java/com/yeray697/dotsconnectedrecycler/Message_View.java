@@ -3,14 +3,11 @@ package com.yeray697.dotsconnectedrecycler;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 /**
@@ -97,7 +94,6 @@ public class Message_View extends RelativeLayout {
             tvSubTitle.setVisibility(View.VISIBLE);
         this.textSubTitle = textSubTitle;
         this.tvSubTitle.setText(this.textSubTitle);
-        updateMarginTop();
     }
 
     public int getTextSubTitleColor() {
@@ -116,7 +112,6 @@ public class Message_View extends RelativeLayout {
     public void setTextTitle(String textTitle) {
         this.textTitle = textTitle;
         this.tvTitle.setText(this.textTitle);
-        updateMarginTop();
     }
 
     public int getTextTitleColor() {
@@ -126,12 +121,5 @@ public class Message_View extends RelativeLayout {
     public void setTextTitleColor(int textTitleColor) {
         this.textTitleColor = textTitleColor;
         this.tvTitle.setTextColor(this.textTitleColor);
-    }
-
-    private void updateMarginTop() {
-        /*int top = (this.getLayoutParams().height + pico) / 2;
-        LayoutParams params  = (LayoutParams) tvTitle.getLayoutParams();
-        params.setMargins(0,top,0,0);
-        */
     }
 }

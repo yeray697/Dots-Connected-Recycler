@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="DotLine_View">
+    <declare-styleable name="DotLineRecyclerView">
         <attr name="lineColor" format="color" />
-        <attr name="lineHeight" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="DotLine_View">
         <attr name="dotColor" format="color" />
         <attr name="dotBorderColor" format="color" />
         <attr name="dotBorderWidth" format="dimension" />

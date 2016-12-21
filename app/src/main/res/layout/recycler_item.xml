@@ -8,8 +8,8 @@
     android:layout_marginRight="5dp"
     android:layout_marginLeft="5dp">
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:layout_gravity="center"
         android:id="@+id/iv_item"/>
     <com.yeray697.dotsconnectedrecycler.DotLine_View
