@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 
 /**
@@ -39,7 +38,19 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     private int dotMarginLeft;
     ArrayList<Integer> colorList;
 
+    private OnImageClickListener mCallbackImageClick;
+    private OnImageLongClickListener mCallbackImageLongClick;
+    private Message_View.OnMessageClickListener mCallbackMessageClick;
+    private Message_View.OnMessageLongClickListener mCallbackMessageLongClick;
+    private DotView.OnDotClickListener mCallbackDotClick;
+    private DotView.OnDotLongClickListener mCallbackDotLongClick;
 
+    public interface OnImageClickListener{
+        void onClick(View v);
+    }
+    public interface OnImageLongClickListener{
+        boolean onClick(View v);
+    }
     //Constructors
     public DotLineRecyclerAdapter(ArrayList<RecyclerData> data) {
         this.list = data;
@@ -83,6 +94,25 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
                     .into(holder.iv_item);
         } else
             holder.iv_item.setImageDrawable(null);
+        holder.iv_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCallbackImageClick != null)
+                    mCallbackImageClick.onClick(v);
+            }
+        });
+        holder.iv_item.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mCallbackImageLongClick != null)
+                    return mCallbackImageLongClick.onClick(v);
+                return false;
+            }
+        });
+        holder.dot.setOnDotClickListener(mCallbackDotClick);
+        holder.dot.setOnDotLongClickListener(mCallbackDotLongClick);
+        holder.message.setOnMessageClickListener(mCallbackMessageClick);
+        holder.message.setOnMessageLongClickListener(mCallbackMessageLongClick);
         holder.message.setTextTitle(aux.getTitle());
         holder.message.setTextSubTitle(aux.getSubtitle());
         setHolderSettings(holder,aux);
@@ -188,5 +218,28 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         return R.mipmap.ic_launcher;
     }
 
-    //TODO add click listeners
+    //Listeners
+    public void setOnImageClickListener(OnImageClickListener onDotClickListener){
+        this.mCallbackImageClick = onDotClickListener;
+    }
+
+    public void setOnImageLongClickListener(OnImageLongClickListener onDotLongClickListener){
+        this.mCallbackImageLongClick = onDotLongClickListener;
+    }
+
+    public void setOnMessageClickListener(Message_View.OnMessageClickListener onDotClickListener){
+        this.mCallbackMessageClick = onDotClickListener;
+    }
+
+    public void setOnMessageLongClickListener(Message_View.OnMessageLongClickListener onDotLongClickListener){
+        this.mCallbackMessageLongClick = onDotLongClickListener;
+    }
+
+    public void setOnDotClickListener(DotView.OnDotClickListener onDotClickListener){
+        this.mCallbackDotClick = onDotClickListener;
+    }
+
+    public void setOnDotLongClickListener(DotView.OnDotLongClickListener onDotLongClickListener){
+        this.mCallbackDotLongClick = onDotLongClickListener;
+    }
 }

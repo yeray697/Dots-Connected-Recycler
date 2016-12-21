@@ -29,6 +29,15 @@ public class Message_View extends RelativeLayout {
     private float textSubTitleSize;
 
     private final int pico = 20;
+    private OnMessageClickListener mCallbackMessageClick;
+    private OnMessageLongClickListener mCallbackMessageLongClick;
+
+    public interface OnMessageClickListener{
+        void onClick(View v);
+    }
+    public interface OnMessageLongClickListener{
+        boolean onClick(View v);
+    }
 
     //Constructors
     public Message_View(Context context, AttributeSet attrs, int defStyle){
@@ -55,8 +64,22 @@ public class Message_View extends RelativeLayout {
         String infService = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater li =
                 (LayoutInflater)getContext().getSystemService(infService);
-        li.inflate(R.layout.message_view, this, true);
-
+        View view = li.inflate(R.layout.message_view, this, true);
+        view.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCallbackMessageClick != null)
+                    mCallbackMessageClick.onClick(v);
+            }
+        });
+        view.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mCallbackMessageLongClick != null)
+                    return mCallbackMessageLongClick.onClick(v);
+                return false;
+            }
+        });
         tvTitle = (TextView) findViewById(R.id.tvTitle_item);
         tvSubTitle = (TextView) findViewById(R.id.tvSubTitle_item);
 
@@ -161,5 +184,14 @@ public class Message_View extends RelativeLayout {
     public void setTextSubTitleSize(float textSubTitleSize) {
         this.textSubTitleSize = textSubTitleSize;
         this.tvSubTitle.setTextSize(this.textSubTitleSize);
+    }
+
+    //Listeners
+    public void setOnMessageClickListener(OnMessageClickListener onDotClickListener){
+        this.mCallbackMessageClick = onDotClickListener;
+    }
+
+    public void setOnMessageLongClickListener(OnMessageLongClickListener onDotLongClickListener){
+        this.mCallbackMessageLongClick = onDotLongClickListener;
     }
 }

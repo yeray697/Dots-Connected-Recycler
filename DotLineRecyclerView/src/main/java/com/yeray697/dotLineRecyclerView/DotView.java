@@ -26,6 +26,8 @@ public class DotView extends RelativeLayout {
     private int dotMarginRight;
     private int dotMarginLeft;
     private int dotMarginBottom;
+    private OnDotClickListener mCallbackClick;
+    private OnDotLongClickListener mCallbackLongClick;
 
     //Constructors
     public DotView(Context context, AttributeSet attrs, int defStyle){
@@ -43,6 +45,12 @@ public class DotView extends RelativeLayout {
         initialize(attrs);
     }
 
+    public interface OnDotClickListener{
+        void onClick(View v);
+    }
+    public interface OnDotLongClickListener{
+        boolean onClick(View v);
+    }
     //Privated methods
     /**
      * Inflate the view and set the attributes if they  are not null
@@ -55,6 +63,21 @@ public class DotView extends RelativeLayout {
         li.inflate(R.layout.dot_view, this, true);
 
         this.dot = findViewById(R.id.dot);
+        this.dot.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCallbackClick != null)
+                    mCallbackClick.onClick(v);
+            }
+        });
+        this.dot.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mCallbackLongClick != null)
+                    return mCallbackLongClick.onClick(v);
+                return false;
+            }
+        });
 
         if (attrs != null) {
             getXMLValues(attrs);
@@ -179,6 +202,15 @@ public class DotView extends RelativeLayout {
     public void setDotMarginRight(int dotMarginRight) {
         this.dotMarginRight = dotMarginRight;
         ((LayoutParams)this.dot.getLayoutParams()).setMargins(dotMarginLeft,dotMarginTop, dotMarginRight,dotMarginBottom);
+    }
+
+    //Listeners
+    public void setOnDotClickListener(OnDotClickListener onDotClickListener){
+        this.mCallbackClick = onDotClickListener;
+    }
+
+    public void setOnDotLongClickListener(OnDotLongClickListener onDotLongClickListener){
+        this.mCallbackLongClick = onDotLongClickListener;
     }
 
 }
