@@ -15,14 +15,19 @@ import android.widget.RelativeLayout;
  */
 
 public class DotLine_View extends RelativeLayout {
-    View line;
-    View dot;
+    private View line;
+    private View dot;
 
-    int dotBorderColor;
-    int dotColor;
-    int colorLine;
-    int dotSize;
-    int dotBorderWidth;
+    private int lineColor;
+    private int lineHeight;
+    private int dotBorderColor;
+    private int dotColor;
+    private int dotSize;
+    private int dotBorderWidth;
+    private int dotMarginTop;
+    private int dotMarginRight;
+    private int dotMarginLeft;
+    private int dotMarginBottom;
 
     //Constructors
     public DotLine_View(Context context, AttributeSet attrs, int defStyle){
@@ -52,12 +57,14 @@ public class DotLine_View extends RelativeLayout {
 
         if (attrs != null) {
             getXMLValues(attrs);
-            this.line.setBackgroundColor(colorLine);
+            this.line.setBackgroundColor(lineColor);
+            this.line.getLayoutParams().height = this.lineHeight;
             GradientDrawable bgShape = (GradientDrawable)dot.getBackground();
             bgShape.setColor(dotColor);
             bgShape.setStroke(dotBorderWidth, dotBorderColor);
             this.dot.getLayoutParams().width = dotSize;
             this.dot.getLayoutParams().height = dotSize;
+            ((LayoutParams)this.dot.getLayoutParams()).setMargins(dotMarginLeft,dotMarginTop, dotMarginRight,dotMarginBottom);
         }
         else {
             defaultAttributes();
@@ -65,11 +72,16 @@ public class DotLine_View extends RelativeLayout {
     }
 
     private void defaultAttributes() {
+        this.lineColor = Color.BLACK;
+        this.lineHeight = 200;
         this.dotColor = Color.WHITE;
-        this.colorLine = Color.BLACK;
-        this.dotBorderColor = colorLine;
+        this.dotBorderColor = lineColor;
         this.dotBorderWidth = 2;
         this.dotSize = 15;
+        this.dotMarginTop = 8;
+        this.dotMarginLeft= 0;
+        this.dotMarginRight = 0;
+        this.dotMarginBottom = 0;
     }
 
     private void getXMLValues(AttributeSet attrs) {
@@ -79,31 +91,36 @@ public class DotLine_View extends RelativeLayout {
                 0, 0);
 
         try {
+            this.lineColor = a.getColor(R.styleable.DotLine_View_lineColor, Color.BLACK);
+            this.lineHeight = (int) a.getDimension(R.styleable.DotLine_View_lineHeight, 200);
             this.dotColor = a.getColor(R.styleable.DotLine_View_dotColor, Color.WHITE);
-            this.colorLine = a.getColor(R.styleable.DotLine_View_lineColor, Color.BLACK);
             this.dotBorderColor = a.getColor(R.styleable.DotLine_View_dotBorderColor, Color.BLACK);
             this.dotBorderWidth = (int) a.getDimension(R.styleable.DotLine_View_dotBorderWidth, 2);
             this.dotSize = (int) a.getDimension(R.styleable.DotLine_View_dotSize,15);
+            this.dotMarginTop = (int) a.getDimension(R.styleable.DotLine_View_dotMarginTop, 0);
+            this.dotMarginLeft = (int) a.getDimension(R.styleable.DotLine_View_dotMarginLeft, 0);
+            this.dotMarginRight = (int) a.getDimension(R.styleable.DotLine_View_dotMarginRight, 0);
+            this.dotMarginBottom = (int) a.getDimension(R.styleable.DotLine_View_dotMarginBottom, 0);
         } finally {
             a.recycle();
         }
     }
 
     //Getters and setters
-    public int getColorLine() {
-        return this.colorLine;
+    public int getLineColor() {
+        return this.lineColor;
     }
 
-    public void setColorLine(int colorLine) {
-        this.colorLine = colorLine;
-        this.line.setBackgroundColor(this.colorLine);
+    public void setLineColor(int lineColor) {
+        this.lineColor = lineColor;
+        this.line.setBackgroundColor(this.lineColor);
     }
 
     public int getDotBorderWidth() {
         return this.dotBorderWidth;
     }
 
-    public void setDotBorderWidth(int dotBorderWidth) {
+    public void setDotBorderSize(int dotBorderWidth) {
         this.dotBorderWidth = dotBorderWidth;
         GradientDrawable bgShape = (GradientDrawable)dot.getBackground();
         bgShape.setStroke(this.dotBorderWidth, this.dotBorderColor);
@@ -129,10 +146,9 @@ public class DotLine_View extends RelativeLayout {
         bgShape.setStroke(this.dotBorderWidth, this.dotBorderColor);
     }
 
-    public void setHeigth(int heigth) {
-        ViewGroup.LayoutParams params = this.line.getLayoutParams();
-        params.height = heigth;
-        this.line.setLayoutParams(params);
+    public void setHeight(int heigth) {
+        this.lineHeight = heigth;
+        this.line.getLayoutParams().height = this.lineHeight;
     }
 
     public int getDotSize() {
@@ -144,4 +160,41 @@ public class DotLine_View extends RelativeLayout {
         this.dot.getLayoutParams().width = dotSize;
         this.dot.getLayoutParams().height = dotSize;
     }
+
+    public int getDotMarginTop() {
+        return this.dotMarginTop;
+    }
+
+    public void setDotMarginTop(int dotMarginTop) {
+        this.dotMarginTop = dotMarginTop;
+        ((LayoutParams)this.dot.getLayoutParams()).setMargins(dotMarginLeft,dotMarginTop, dotMarginRight,dotMarginBottom);
+    }
+
+    public int getDotMarginBottom() {
+        return dotMarginBottom;
+    }
+
+    public void setDotMarginBottom(int dotMarginBottom) {
+        this.dotMarginBottom = dotMarginBottom;
+        ((LayoutParams)this.dot.getLayoutParams()).setMargins(dotMarginLeft,dotMarginTop, dotMarginRight,dotMarginBottom);
+    }
+
+    public int getDotMarginLeft() {
+        return dotMarginLeft;
+    }
+
+    public void setDotMarginLeft(int dotMarginLeft) {
+        this.dotMarginLeft = dotMarginLeft;
+        ((LayoutParams)this.dot.getLayoutParams()).setMargins(dotMarginLeft,dotMarginTop, dotMarginRight,dotMarginBottom);
+    }
+
+    public int getDotMarginRight() {
+        return dotMarginRight;
+    }
+
+    public void setDotMarginRight(int dotMarginRight) {
+        this.dotMarginRight = dotMarginRight;
+        ((LayoutParams)this.dot.getLayoutParams()).setMargins(dotMarginLeft,dotMarginTop, dotMarginRight,dotMarginBottom);
+    }
+
 }

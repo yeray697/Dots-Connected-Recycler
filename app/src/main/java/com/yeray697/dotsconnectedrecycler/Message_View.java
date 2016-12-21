@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 /**
@@ -24,6 +25,8 @@ public class Message_View extends RelativeLayout {
     private String textSubTitle;
     private int textTitleColor;
     private int textSubTitleColor;
+
+    private final int pico = 20;
 
     //Constructors
     public Message_View(Context context, AttributeSet attrs, int defStyle){
@@ -94,6 +97,7 @@ public class Message_View extends RelativeLayout {
             tvSubTitle.setVisibility(View.VISIBLE);
         this.textSubTitle = textSubTitle;
         this.tvSubTitle.setText(this.textSubTitle);
+        updateMarginTop();
     }
 
     public int getTextSubTitleColor() {
@@ -102,7 +106,7 @@ public class Message_View extends RelativeLayout {
 
     public void setTextSubTitleColor(int textSubTitleColor) {
         this.textSubTitleColor = textSubTitleColor;
-        this.tvSubTitle.setBackgroundColor(this.textSubTitleColor);
+        this.tvSubTitle.setTextColor(this.textSubTitleColor);
     }
 
     public String getTextTitle() {
@@ -112,6 +116,7 @@ public class Message_View extends RelativeLayout {
     public void setTextTitle(String textTitle) {
         this.textTitle = textTitle;
         this.tvTitle.setText(this.textTitle);
+        updateMarginTop();
     }
 
     public int getTextTitleColor() {
@@ -120,6 +125,13 @@ public class Message_View extends RelativeLayout {
 
     public void setTextTitleColor(int textTitleColor) {
         this.textTitleColor = textTitleColor;
-        this.tvTitle.setBackgroundColor(this.textSubTitleColor);
+        this.tvTitle.setTextColor(this.textTitleColor);
+    }
+
+    private void updateMarginTop() {
+        /*int top = (this.getLayoutParams().height + pico) / 2;
+        LayoutParams params  = (LayoutParams) tvTitle.getLayoutParams();
+        params.setMargins(0,top,0,0);
+        */
     }
 }

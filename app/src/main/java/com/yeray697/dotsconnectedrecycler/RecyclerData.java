@@ -1,20 +1,34 @@
 package com.yeray697.dotsconnectedrecycler;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.IntDef;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * Created by yeray697 on 20/12/16.
  */
 
 public class RecyclerData {
+
     private int imageResource;
     private Drawable image;
     private String imageUrl;
+
     private String title;
     private String subtitle;
 
     private final int EMPTY_RESOURCE = -1;
     private final String EMPTY_URL = "-1";
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({Priority.LOW, Priority.MEDIUM, Priority.HIGH})
+    public @interface Priority {
+        int LOW = 1;
+        int MEDIUM = 2;
+        int HIGH = 3;
+    }
 
     //Constructors
     public RecyclerData(String imageUrl, String title, String subtitle) {
@@ -41,6 +55,7 @@ public class RecyclerData {
         this.imageResource = EMPTY_RESOURCE;
         this.imageUrl = EMPTY_URL;
     }
+
     public RecyclerData(String title, String subtitle) {
         this.title = title;
         this.subtitle = subtitle;
