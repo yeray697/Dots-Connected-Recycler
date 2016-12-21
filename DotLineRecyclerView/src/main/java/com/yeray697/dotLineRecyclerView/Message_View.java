@@ -1,8 +1,14 @@
 package com.yeray697.dotLineRecyclerView;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.RippleDrawable;
+import android.graphics.drawable.StateListDrawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -18,6 +24,7 @@ import android.widget.TextView;
  * Created on 21/12/16.
  */
 public class Message_View extends RelativeLayout {
+    private RelativeLayout rlMessage;
     private TextView tvTitle;
     private TextView tvSubTitle;
 
@@ -80,6 +87,7 @@ public class Message_View extends RelativeLayout {
                 return false;
             }
         });
+        rlMessage = (RelativeLayout) findViewById(R.id.rlMessage);
         tvTitle = (TextView) findViewById(R.id.tvTitle_item);
         tvSubTitle = (TextView) findViewById(R.id.tvSubTitle_item);
 
@@ -186,6 +194,20 @@ public class Message_View extends RelativeLayout {
         this.tvSubTitle.setTextSize(this.textSubTitleSize);
     }
 
+    public void setMessageBackground(int resource, int resourcePressed) {
+
+        StateListDrawable states = new StateListDrawable();
+
+        states.addState(new int[] {-android.R.attr.state_pressed, android.R.attr.state_enabled}, ContextCompat.getDrawable(getContext(),resource));
+        states.addState(new int[] {android.R.attr.state_pressed, android.R.attr.state_enabled}, ContextCompat.getDrawable(getContext(),resourcePressed));
+        rlMessage.setBackground(states);
+    }
+
+    public void setMessageBackground(int messageBackground) {
+        rlMessage.setBackgroundResource(messageBackground);
+        //TODO add ripple effect with background
+    }
+
     //Listeners
     public void setOnMessageClickListener(OnMessageClickListener onDotClickListener){
         this.mCallbackMessageClick = onDotClickListener;
@@ -194,4 +216,5 @@ public class Message_View extends RelativeLayout {
     public void setOnMessageLongClickListener(OnMessageLongClickListener onDotLongClickListener){
         this.mCallbackMessageLongClick = onDotLongClickListener;
     }
+
 }

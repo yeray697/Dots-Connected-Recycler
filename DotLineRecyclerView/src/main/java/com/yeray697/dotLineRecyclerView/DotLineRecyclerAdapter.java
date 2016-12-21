@@ -26,6 +26,8 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     private static final int DEFAULT_DOT_MARGIN_RIGHT = 120;
     private static final int TEXT_TITLE_SIZE = 17;
     private static final int TEXT_SUBTITLE_SIZE = 12;
+    private static final int MESSAGE_BACKGROUND = R.drawable.bocadillo;
+    private static final int MESSAGE_BACKGROUND_PRESSED = R.drawable.bocadillo_pressed;
 
     private final int DOT_BORDER_COLOR = Color.BLACK;
     private final int DOT_COLOR = Color.WHITE;
@@ -46,7 +48,6 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     private Message_View.OnMessageLongClickListener mCallbackMessageLongClick;
     private DotView.OnDotClickListener mCallbackDotClick;
     private DotView.OnDotLongClickListener mCallbackDotLongClick;
-
     public interface OnImageClickListener{
         void onClick(View v);
     }
@@ -85,6 +86,12 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     @Override
     public void onBindViewHolder(final Holder holder, int position) {
         RecyclerData aux = list.get(position);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            holder.message.setMessageBackground(getMessageBackground());
+        } else {
+            holder.message.setMessageBackground(getMessageBackground(), getMessageBackgroundPressed());
+
+        }
         if (aux.isImageADrawable()){
             holder.iv_item.setImageDrawable(aux.getImage());
         } else if (aux.isImageAResource()){
@@ -243,6 +250,14 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
 
     public int getImageError(){
         return R.mipmap.ic_launcher;
+    }
+
+    public int getMessageBackground(){
+        return MESSAGE_BACKGROUND;
+    }
+
+    public int getMessageBackgroundPressed(){
+        return MESSAGE_BACKGROUND_PRESSED;
     }
 
     //Listeners

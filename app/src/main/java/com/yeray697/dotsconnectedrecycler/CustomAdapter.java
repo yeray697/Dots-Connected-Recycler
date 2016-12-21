@@ -65,4 +65,14 @@ public class CustomAdapter extends DotLineRecyclerAdapter {
     public int getSeparator() {
         return 50;
     }
+
+    @Override
+    public int getMessageBackground() {
+        return R.drawable.bocadillo_pressed;
+    }
+
+    @Override
+    public int getMessageBackgroundPressed() {
+        return super.getMessageBackgroundPressed();
+    }
 }
