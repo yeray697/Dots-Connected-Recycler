@@ -23,10 +23,12 @@ import java.util.Map;
 public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLineRecyclerAdapter.Holder> {
 
     private static final int DEFAULT_DOT_MARGIN_RIGHT = 120;
+    private static final int TEXT_TITLE_SIZE = 17;
+    private static final int TEXT_SUBTITLE_SIZE = 12;
 
     private final int DOT_BORDER_COLOR = Color.BLACK;
     private final int DOT_COLOR = Color.WHITE;
-    private final int DOT_SIZE = 30;
+    private final int DOT_SIZE = 2;
     private final int DOT_BORDER_SIZE = 2;
 
     private final int TEXT_TITLE_COLOR = Color.GRAY;
@@ -97,12 +99,14 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         else
             holder.dot.setDotBorderColor(colorList.get(aux.getIdColor()));
         holder.dot.setDotColor(getDotColor());
-        holder.dot.setDotSize(getDotSize());
+        holder.dot.setDotSize((getDotSize() + 1) * 10);
         holder.dot.setDotBorderSize(getDotBorderSize());
         holder.dot.setDotMarginLeft(getDotMarginLeft());
 
         holder.message.setTextSubTitleColor(getTextSubtitleColor());
         holder.message.setTextTitleColor(getTextTitleColor());
+        holder.message.setTextTitleSize(getTextTitleSize());
+        holder.message.setTextSubTitleSize(getTextSubtitleSize());
 
         ViewGroup.MarginLayoutParams relativeParams = (ViewGroup.MarginLayoutParams) holder.rlItem.getLayoutParams();
         relativeParams.setMargins(5, 0, 5, getSeparator() * 4);
@@ -166,6 +170,14 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
 
     public int getTextTitleColor() {
         return TEXT_TITLE_COLOR;
+    }
+
+    public int getTextSubtitleSize() {
+        return TEXT_SUBTITLE_SIZE;
+    }
+
+    public int getTextTitleSize() {
+        return TEXT_TITLE_SIZE;
     }
 
     public int getSeparator(){

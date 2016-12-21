@@ -43,7 +43,7 @@ public class CustomAdapter extends DotLineRecyclerAdapter {
 
     @Override
     public int getDotSize() {
-        return 10;
+        return 2;
     }
 
     @Override

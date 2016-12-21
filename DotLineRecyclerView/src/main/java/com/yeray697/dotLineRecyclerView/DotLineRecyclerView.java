@@ -132,7 +132,7 @@ public class DotLineRecyclerView extends RelativeLayout {
      */
     public void setAdapter(RecyclerView.Adapter adapter){
         margin = ((DotLineRecyclerAdapter) adapter).getDotMarginLeft();
-        margin += (((DotLineRecyclerAdapter) adapter).getDotSize() / 2);
+        margin += ((((DotLineRecyclerAdapter) adapter).getDotSize()  + 1) * 10 / 2);
         recyclerView.setAdapter(adapter);
         setMarginLine(margin);
     }

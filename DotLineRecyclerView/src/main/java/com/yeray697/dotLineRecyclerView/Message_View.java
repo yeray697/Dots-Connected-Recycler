@@ -25,6 +25,8 @@ public class Message_View extends RelativeLayout {
     private String textSubTitle;
     private int textTitleColor;
     private int textSubTitleColor;
+    private float textTitleSize;
+    private float textSubTitleSize;
 
     private final int pico = 20;
 
@@ -75,6 +77,8 @@ public class Message_View extends RelativeLayout {
         setTextSubTitle("Subtitle");
         setTextTitleColor(Color.BLACK);
         setTextSubTitleColor(Color.BLACK);
+        setTextTitleSize(17);
+        setTextSubTitleSize(12);
     }
 
     /**
@@ -92,6 +96,8 @@ public class Message_View extends RelativeLayout {
             setTextSubTitle(a.getString(R.styleable.Message_View_textSubtitle));
             setTextTitleColor(a.getColor(R.styleable.Message_View_textTitleColor, Color.BLACK));
             setTextSubTitleColor(a.getColor(R.styleable.Message_View_textSubtitleColor, 2));
+            setTextTitleSize(a.getDimension(R.styleable.Message_View_textTitleSize, 17));
+            setTextSubTitleSize(a.getDimension(R.styleable.Message_View_textSubtitleSize, 12));
         } finally {
             a.recycle();
         }
@@ -139,5 +145,21 @@ public class Message_View extends RelativeLayout {
         this.tvTitle.setTextColor(this.textTitleColor);
     }
 
-    //TODO add methods to modify text appearance
+    public float getTextTitleSize() {
+        return textTitleSize;
+    }
+
+    public void setTextTitleSize(float textTitleSize) {
+        this.textTitleSize = textTitleSize;
+        this.tvTitle.setTextSize(this.textTitleSize);
+    }
+
+    public float getTextSubTitleSize() {
+        return textSubTitleSize;
+    }
+
+    public void setTextSubTitleSize(float textSubTitleSize) {
+        this.textSubTitleSize = textSubTitleSize;
+        this.tvSubTitle.setTextSize(this.textSubTitleSize);
+    }
 }
