@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         colorList.add(Color.YELLOW);
         colorList.add(Color.GREEN);
 
-        adapter = new CustomAdapter(data);
+        adapter = new CustomAdapter(data,colorList);
         adapter.setOnImageClickListener(new DotLineRecyclerAdapter.OnImageClickListener() {
             @Override
             public void onClick(View v) {

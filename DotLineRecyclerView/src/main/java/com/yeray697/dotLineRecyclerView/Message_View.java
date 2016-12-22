@@ -203,9 +203,27 @@ public class Message_View extends RelativeLayout {
         rlMessage.setBackground(states);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void setMessageBackground(int messageBackground) {
-        rlMessage.setBackgroundResource(messageBackground);
-        //TODO add ripple effect with background
+        int color = ContextCompat.getColor(getContext(),R.color.gray_transparent);
+         ColorStateList colorStateList = new ColorStateList(
+                new int[][]
+                        {
+                                new int[]{}
+                        },
+                new int[]
+                        {
+                                color
+                        }
+        );
+
+        StateListDrawable drawable = new StateListDrawable();
+
+        drawable.addState(new int[] {-android.R.attr.state_pressed, -android.R.attr.state_enabled}, ContextCompat.getDrawable(getContext(),messageBackground));
+
+        RippleDrawable rippleDrawable = new RippleDrawable(colorStateList,drawable,null);
+
+        rlMessage.setBackground(rippleDrawable);
     }
 
     //Listeners
