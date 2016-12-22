@@ -1,6 +1,6 @@
 # How to import it to your project
 #### 1. Add the library
-File, New, New module, Import .JAR/.AAR Package, Click at select package (you can choose a name for the library added), and Finish
+File -> New -> New module -> Import .JAR/.AAR Package -> Click at select package (you can choose a name for the library added) -> Finish
 Check in your setting's gradle if it auto added the library
 ![Settings' gradle](./images/1.png?raw=true)
 ### 2. Add dependencies
