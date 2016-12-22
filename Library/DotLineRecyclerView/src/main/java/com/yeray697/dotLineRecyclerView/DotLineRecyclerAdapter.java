@@ -159,7 +159,7 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
      */
     private void setHolderSettings(Holder holder, RecyclerData aux) {
         if (colorList == null || aux.getIdColor() == RecyclerData.NO_ID_COLOR)
-            holder.dot.setDotBorderColor(getDotBoderColor());
+            holder.dot.setDotBorderColor(getDotBorderColor());
         else
             holder.dot.setDotBorderColor(colorList.get(aux.getIdColor()));
         holder.dot.setDotColor(getDotColor());
@@ -212,7 +212,7 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     }
 
     //Methods to override
-    public int getDotBoderColor() {
+    public int getDotBorderColor() {
         return DOT_BORDER_COLOR;
     }
 

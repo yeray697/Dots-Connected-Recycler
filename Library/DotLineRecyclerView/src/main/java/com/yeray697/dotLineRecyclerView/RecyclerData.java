@@ -2,6 +2,7 @@ package com.yeray697.dotLineRecyclerView;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IntDef;
+import android.text.TextUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -65,7 +66,7 @@ public class RecyclerData {
 
     public RecyclerData(String imageUrl, String title, String subtitle) {
 
-        this.imageUrl = imageUrl;
+        this.imageUrl = (TextUtils.isEmpty(imageUrl)?"-1":imageUrl);
         this.title = title;
         this.subtitle = subtitle;
         this.imageResource = EMPTY_RESOURCE;
