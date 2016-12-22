@@ -10,6 +10,8 @@ Add to your project's gradle (change 'DotLineRecyclerView' if you changed the na
         compile project(":DotLineRecyclerView")
         compile 'com.android.support:recyclerview-v7:25.1.0'
     }
+    
+More info at: https://developer.android.com/studio/projects/android-library.html#AddDependency
 
 # How to use
 First of all, you hace to declare a DotLineRecyclerView item at your layout.
