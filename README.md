@@ -45,7 +45,7 @@ It has 8 constructors
     public RecyclerData(String title, String subtitle)
     
 These four constructor work the same way, but you can pass an integer id
-This id will be used in your adapter if you pass an ArrayList with colors (more information in the following section
+This id will be used in your adapter if you pass an ArrayList with colors (more information in the following section)
 
     public RecyclerData(String imageUrl, String title, String subtitle, int idColor)
     public RecyclerData(int imageResource, String title, String subtitle, int idColor)
