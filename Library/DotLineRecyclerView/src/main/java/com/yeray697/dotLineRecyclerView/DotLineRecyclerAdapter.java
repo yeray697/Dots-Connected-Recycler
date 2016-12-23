@@ -48,6 +48,7 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     private Message_View.OnMessageLongClickListener mCallbackMessageLongClick;
     private DotView.OnDotClickListener mCallbackDotClick;
     private DotView.OnDotLongClickListener mCallbackDotLongClick;
+
     public interface OnImageClickListener{
         void onClick(View v);
     }
@@ -260,6 +261,23 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         return MESSAGE_BACKGROUND_PRESSED;
     }
 
+    public ArrayList<RecyclerData> getList(){
+        return list;
+    }
+    public ArrayList<Integer> getColorList(){
+        return colorList;
+    }
+    public void setColorList(ArrayList<Integer> colorList){
+        this.colorList = colorList;
+        notifyDataSetChanged();
+    }
+    public void clear(){
+        this.list.clear();
+        notifyDataSetChanged();
+    }
+    public void addAll(ArrayList<RecyclerData> list){
+        this.list.addAll(list);
+    }
     //Listeners
     public void setOnImageClickListener(OnImageClickListener onDotClickListener){
         this.mCallbackImageClick = onDotClickListener;

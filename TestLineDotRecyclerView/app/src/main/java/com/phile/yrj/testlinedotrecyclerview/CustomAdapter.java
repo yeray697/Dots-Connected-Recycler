@@ -26,7 +26,7 @@ public class CustomAdapter extends DotLineRecyclerAdapter {
     }
 
     @Override
-    public int getDotBoderColor() {
+    public int getDotBorderColor() {
         return Color.RED;
     }
 
