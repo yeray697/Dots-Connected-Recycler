@@ -194,36 +194,42 @@ public class Message_View extends RelativeLayout {
         this.tvSubTitle.setTextSize(this.textSubTitleSize);
     }
 
-    public void setMessageBackground(int resource, int resourcePressed) {
-
+    public void setMessageBackground(int resource, int resourcePressed, boolean isListener) {
         StateListDrawable states = new StateListDrawable();
-
-        states.addState(new int[] {-android.R.attr.state_pressed, android.R.attr.state_enabled}, ContextCompat.getDrawable(getContext(),resource));
-        states.addState(new int[] {android.R.attr.state_pressed, android.R.attr.state_enabled}, ContextCompat.getDrawable(getContext(),resourcePressed));
+        states.addState(new int[]{-android.R.attr.state_pressed, android.R.attr.state_enabled}, ContextCompat.getDrawable(getContext(), resource));
+        if (isListener) {
+            states.addState(new int[]{android.R.attr.state_pressed, android.R.attr.state_enabled}, ContextCompat.getDrawable(getContext(), resourcePressed));
+        } else{
+            states.addState(new int[]{android.R.attr.state_pressed, android.R.attr.state_enabled}, ContextCompat.getDrawable(getContext(), resource));
+        }
         rlMessage.setBackground(states);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void setMessageBackground(int messageBackground) {
+    public void setMessageBackground(int messageBackground, boolean isListener) {
         int color = ContextCompat.getColor(getContext(),R.color.gray_transparent);
-         ColorStateList colorStateList = new ColorStateList(
-                new int[][]
-                        {
-                                new int[]{}
-                        },
-                new int[]
-                        {
-                                color
-                        }
-        );
+            ColorStateList colorStateList = new ColorStateList(
+                    new int[][]
+                            {
+                                    new int[]{}
+                            },
+                    new int[]
+                            {
+                                    color
+                            }
+            );
 
-        StateListDrawable drawable = new StateListDrawable();
+            StateListDrawable drawable = new StateListDrawable();
 
-        drawable.addState(new int[] {-android.R.attr.state_pressed, -android.R.attr.state_enabled}, ContextCompat.getDrawable(getContext(),messageBackground));
+            drawable.addState(new int[]{-android.R.attr.state_pressed, -android.R.attr.state_enabled}, ContextCompat.getDrawable(getContext(), messageBackground));
 
-        RippleDrawable rippleDrawable = new RippleDrawable(colorStateList,drawable,null);
+            RippleDrawable rippleDrawable = new RippleDrawable(colorStateList, drawable, null);
 
-        rlMessage.setBackground(rippleDrawable);
+        if (isListener) {
+            rlMessage.setBackground(rippleDrawable);
+        }
+        else
+            rlMessage.setBackground(drawable);
     }
 
     //Listeners

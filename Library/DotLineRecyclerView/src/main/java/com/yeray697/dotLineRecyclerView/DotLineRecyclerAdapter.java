@@ -40,6 +40,8 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     private ArrayList<RecyclerData> list;
     private int SEPARATOR = 10;
     private int dotMarginLeft;
+    private final int MESSAGE_MARGIN_TOP = 10;
+    private final int MESSAGE_MARGIN_RIGHT = 10;
     ArrayList<Integer> colorList;
 
     private OnImageClickListener mCallbackImageClick;
@@ -87,10 +89,11 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     @Override
     public void onBindViewHolder(final Holder holder, int position) {
         RecyclerData aux = list.get(position);
+        boolean isMessageClickListener = (mCallbackMessageClick!= null || mCallbackMessageLongClick != null);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            holder.message.setMessageBackground(getMessageBackground());
+            holder.message.setMessageBackground(getMessageBackground(),isMessageClickListener);
         } else {
-            holder.message.setMessageBackground(getMessageBackground(), getMessageBackgroundPressed());
+            holder.message.setMessageBackground(getMessageBackground(), getMessageBackgroundPressed(),isMessageClickListener);
 
         }
         if (aux.isImageADrawable()){
@@ -155,6 +158,7 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
 
     /**
      * Called from onBindViewHolder, it sets settings on the view components
+     *
      * @param holder Holder that contains the view
      * @param aux
      */
@@ -167,6 +171,7 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         holder.dot.setDotSize((getDotSize() + 1) * 10);
         holder.dot.setDotBorderSize(getDotBorderSize());
         holder.dot.setDotMarginLeft(getDotMarginLeft());
+        ((RelativeLayout.LayoutParams) holder.message.getLayoutParams()).setMargins(0,getMessageMarginTop(),getMessageMarginRight(),0);
 
         holder.message.setTextSubTitleColor(getTextSubtitleColor());
         holder.message.setTextTitleColor(getTextTitleColor());
@@ -174,7 +179,7 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         holder.message.setTextSubTitleSize(getTextSubtitleSize());
 
         ViewGroup.MarginLayoutParams relativeParams = (ViewGroup.MarginLayoutParams) holder.rlItem.getLayoutParams();
-        relativeParams.setMargins(5, 0, 5, getSeparator() * 4);
+        relativeParams.setMargins(5, 20, 5, getSeparator() * 4);
         holder.rlItem.setLayoutParams(relativeParams);
         holder.rlItem.requestLayout();
     }
@@ -184,11 +189,11 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         return list.size();
     }
 
-    class Holder extends RecyclerView.ViewHolder {
-        RelativeLayout rlItem;
-        ImageView iv_item;
-        Message_View message;
-        DotView dot;
+    public class Holder extends RecyclerView.ViewHolder {
+        public RelativeLayout rlItem;
+        public ImageView iv_item;
+        public Message_View message;
+        public DotView dot;
 
         Holder(View itemView) {
             super(itemView);
@@ -210,6 +215,25 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
 
     public final int getDotMarginLeft() {
         return dotMarginLeft;
+    }
+
+
+    public ArrayList<RecyclerData> getList(){
+        return list;
+    }
+    public ArrayList<Integer> getColorList(){
+        return colorList;
+    }
+    public void setColorList(ArrayList<Integer> colorList){
+        this.colorList = colorList;
+        notifyDataSetChanged();
+    }
+    public void clear(){
+        this.list.clear();
+        notifyDataSetChanged();
+    }
+    public void addAll(ArrayList<RecyclerData> list){
+        this.list.addAll(list);
     }
 
     //Methods to override
@@ -261,23 +285,14 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         return MESSAGE_BACKGROUND_PRESSED;
     }
 
-    public ArrayList<RecyclerData> getList(){
-        return list;
+    public int getMessageMarginTop() {
+        return MESSAGE_MARGIN_TOP;
     }
-    public ArrayList<Integer> getColorList(){
-        return colorList;
+
+    public int getMessageMarginRight() {
+        return MESSAGE_MARGIN_RIGHT;
     }
-    public void setColorList(ArrayList<Integer> colorList){
-        this.colorList = colorList;
-        notifyDataSetChanged();
-    }
-    public void clear(){
-        this.list.clear();
-        notifyDataSetChanged();
-    }
-    public void addAll(ArrayList<RecyclerData> list){
-        this.list.addAll(list);
-    }
+
     //Listeners
     public void setOnImageClickListener(OnImageClickListener onDotClickListener){
         this.mCallbackImageClick = onDotClickListener;

@@ -23,6 +23,7 @@
         android:id="@+id/message_item"
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/line_and_dot"
         android:layout_toEndOf="@id/line_and_dot"
