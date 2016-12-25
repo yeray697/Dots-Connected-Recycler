@@ -168,15 +168,18 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
         else
             holder.dot.setDotBorderColor(colorList.get(aux.getIdColor()));
         holder.dot.setDotColor(getDotColor());
-        holder.dot.setDotSize((getDotSize() + 1) * 10);
-        holder.dot.setDotBorderSize(getDotBorderSize());
-        holder.dot.setDotMarginLeft(getDotMarginLeft());
-        ((RelativeLayout.LayoutParams) holder.message.getLayoutParams()).setMargins(0,getMessageMarginTop(),getMessageMarginRight(),0);
+        holder.dot.setDotSize((int)(Utils.dpToPx(holder.dot.getContext(),getDotSize())) * 10);
+        holder.dot.setDotBorderSize((int)(Utils.dpToPx(holder.dot.getContext(),getDotBorderSize())));
+        holder.dot.setDotMarginLeft((int)(Utils.dpToPx(holder.dot.getContext(),getDotMarginLeft())));
 
         holder.message.setTextSubTitleColor(getTextSubtitleColor());
         holder.message.setTextTitleColor(getTextTitleColor());
         holder.message.setTextTitleSize(getTextTitleSize());
         holder.message.setTextSubTitleSize(getTextSubtitleSize());
+        ((RelativeLayout.LayoutParams) holder.message.getLayoutParams()).setMargins(0,
+                (int)(Utils.dpToPx(holder.dot.getContext(),getMessageMarginTop())),
+                (int)(Utils.dpToPx(holder.dot.getContext(),getMessageMarginRight())),
+                0);
 
         ViewGroup.MarginLayoutParams relativeParams = (ViewGroup.MarginLayoutParams) holder.rlItem.getLayoutParams();
         relativeParams.setMargins(5, 20, 5, getSeparator() * 4);

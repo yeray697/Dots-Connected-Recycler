@@ -89,13 +89,13 @@ public class DotLineRecyclerView extends RelativeLayout {
 
     /**
      * Set the left margin from the line
-     * @param margin Margin to set
      */
-    private void setMarginLine(int margin){
+    private void setMarginLine(int dotSize){
         if (recyclerView.getAdapter() != null) {
             ViewGroup.MarginLayoutParams relativeParams = (ViewGroup.MarginLayoutParams) line.getLayoutParams();
-            int lineWidth = (line.getLayoutParams().width / 2) - 5;
-            relativeParams.setMargins((margin - lineWidth), 0, 0, 0);
+            //int lineWidth = (line.getWidth() / 2);
+            //relativeParams.setMargins((margin - lineWidth), 0, 0, 0);
+            relativeParams.setMargins((margin - dotSize), 0, 0, 0);
             line.setLayoutParams(relativeParams);
             line.requestLayout();
         }
@@ -131,10 +131,10 @@ public class DotLineRecyclerView extends RelativeLayout {
      * Set the adapter
      */
     public void setAdapter(RecyclerView.Adapter adapter){
-        margin = ((DotLineRecyclerAdapter) adapter).getDotMarginLeft();
-        margin += ((((DotLineRecyclerAdapter) adapter).getDotSize()  + 1) * 10 / 2);
+        margin = (int)(Utils.dpToPx(getContext(),((DotLineRecyclerAdapter) adapter).getDotMarginLeft())) + 5;
+        margin += ((int)(Utils.dpToPx(getContext(),((DotLineRecyclerAdapter) adapter).getDotSize()))) * 10 / 2;
         recyclerView.setAdapter(adapter);
-        setMarginLine(margin);
+        setMarginLine(0);
     }
 
     /**
@@ -145,8 +145,9 @@ public class DotLineRecyclerView extends RelativeLayout {
     }
 
     public void setLineWidth(int width){
-        line.getLayoutParams().width = (int) (getResources().getDisplayMetrics().density * width);
-        setMarginLine(margin);
+        int widthConverted = (int) Utils.dpToPx(getContext(),width);
+        line.getLayoutParams().width = widthConverted;
+        setMarginLine((widthConverted/2));
 
     }
 }
