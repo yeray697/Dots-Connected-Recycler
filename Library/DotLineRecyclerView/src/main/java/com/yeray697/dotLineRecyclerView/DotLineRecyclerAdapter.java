@@ -23,7 +23,7 @@ import java.util.ArrayList;
  */
 public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLineRecyclerAdapter.Holder> {
 
-    private static final int DEFAULT_DOT_MARGIN_RIGHT = 120;
+    private static final int DEFAULT_DOT_MARGIN_RIGHT = 100;
     private static final int TEXT_TITLE_SIZE = 17;
     private static final int TEXT_SUBTITLE_SIZE = 12;
     private static final int MESSAGE_BACKGROUND = R.drawable.bocadillo;
