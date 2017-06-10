@@ -35,15 +35,16 @@ public class Message_View extends RelativeLayout {
     private float textTitleSize;
     private float textSubTitleSize;
 
+    private int position;
     private final int pico = 20;
     private OnMessageClickListener mCallbackMessageClick;
     private OnMessageLongClickListener mCallbackMessageLongClick;
 
     public interface OnMessageClickListener{
-        void onClick(View v);
+        void onClick(View v, int position);
     }
     public interface OnMessageLongClickListener{
-        boolean onClick(View v);
+        boolean onClick(View v, int position);
     }
 
     //Constructors
@@ -76,14 +77,14 @@ public class Message_View extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 if (mCallbackMessageClick != null)
-                    mCallbackMessageClick.onClick(v);
+                    mCallbackMessageClick.onClick(v,position);
             }
         });
         view.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 if (mCallbackMessageLongClick != null)
-                    return mCallbackMessageLongClick.onClick(v);
+                    return mCallbackMessageLongClick.onClick(v,position);
                 return false;
             }
         });
@@ -241,4 +242,11 @@ public class Message_View extends RelativeLayout {
         this.mCallbackMessageLongClick = onDotLongClickListener;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 }

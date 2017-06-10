@@ -18,6 +18,8 @@ import android.widget.RelativeLayout;
 public class DotView extends RelativeLayout {
     private View dot;
 
+    private int position;
+
     private int dotBorderColor;
     private int dotColor;
     private int dotSize;
@@ -46,10 +48,10 @@ public class DotView extends RelativeLayout {
     }
 
     public interface OnDotClickListener{
-        void onClick(View v);
+        void onClick(View v, int position);
     }
     public interface OnDotLongClickListener{
-        boolean onClick(View v);
+        boolean onClick(View v, int position);
     }
     //Privated methods
     /**
@@ -67,14 +69,14 @@ public class DotView extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 if (mCallbackClick != null)
-                    mCallbackClick.onClick(v);
+                    mCallbackClick.onClick(v, position);
             }
         });
         this.dot.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 if (mCallbackLongClick != null)
-                    return mCallbackLongClick.onClick(v);
+                    return mCallbackLongClick.onClick(v, position);
                 return false;
             }
         });
@@ -213,4 +215,11 @@ public class DotView extends RelativeLayout {
         this.mCallbackLongClick = onDotLongClickListener;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 }

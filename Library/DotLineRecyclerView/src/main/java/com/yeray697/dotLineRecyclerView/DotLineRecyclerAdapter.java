@@ -52,10 +52,10 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     private DotView.OnDotLongClickListener mCallbackDotLongClick;
 
     public interface OnImageClickListener{
-        void onClick(View v);
+        void onClick(View v, int position);
     }
     public interface OnImageLongClickListener{
-        boolean onClick(View v);
+        boolean onClick(View v, int position);
     }
     //Constructors
     public DotLineRecyclerAdapter(ArrayList<RecyclerData> data) {
@@ -87,7 +87,7 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
     }
 
     @Override
-    public void onBindViewHolder(final Holder holder, int position) {
+    public void onBindViewHolder(final Holder holder, final int position) {
         RecyclerData aux = list.get(position);
         boolean isMessageClickListener = (mCallbackMessageClick!= null || mCallbackMessageLongClick != null);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
@@ -111,14 +111,14 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
             @Override
             public void onClick(View v) {
                 if (mCallbackImageClick != null)
-                    mCallbackImageClick.onClick(v);
+                    mCallbackImageClick.onClick(v,position);
             }
         });
         holder.iv_item.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 if (mCallbackImageLongClick != null)
-                    return mCallbackImageLongClick.onClick(v);
+                    return mCallbackImageLongClick.onClick(v,position);
                 return false;
             }
         });
@@ -147,6 +147,8 @@ public abstract class DotLineRecyclerAdapter extends RecyclerView.Adapter<DotLin
                 }
             });
         }
+        holder.dot.setPosition(position);
+        holder.message.setPosition(position);
         holder.dot.setOnDotClickListener(mCallbackDotClick);
         holder.dot.setOnDotLongClickListener(mCallbackDotLongClick);
         holder.message.setOnMessageClickListener(mCallbackMessageClick);
